@@ -23,8 +23,11 @@ public class Control implements MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		etat.jump();
-		vue.repaint();
+		if(!Affichage.ETAT.testPerdu())
+		{
+			etat.jump();
+			vue.repaint();
+		}
 	}
 
 	@Override

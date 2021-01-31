@@ -13,11 +13,11 @@ public class Affichage extends JPanel {
         public static final int HAUT = 500;
         
         /** Abscisse du centre de l'objet */
-        public static final int XCENTRE = 40;
+        public static final int XCENTRE = 80;
         /** Largeur de l'objet */
         public static final int ELLARG = 40;
         /** Hauteur de l'objet */
-        public static final int ELHAUT = 120;
+        public static final int ELHAUT = 40;
         
         /**
          * Instance d'un Etat lié à l'affichage
@@ -31,11 +31,9 @@ public class Affichage extends JPanel {
         }
         
         /**
-         *Dessine les objets*/
-        public void paint(Graphics g)
+         *Dessine la ligne*/
+        public void line(Graphics g)
         {
-        	super.paint(g);
-        	g.drawOval(XCENTRE, ETAT.getHauteur(), ELLARG, ELHAUT);
         	if(ETAT.parcours != null) {
 	        	boolean temp = true;
 	        	int i = 0;
@@ -48,6 +46,24 @@ public class Affichage extends JPanel {
 	        	}
         	}
         }
+        
+        /**
+         *Dessine l'ellipse*/
+        public void oval(Graphics g)
+        {
+        	g.drawOval(XCENTRE, ETAT.getHauteur(), ELLARG, ELHAUT);
+        }
+        
+        /**
+         *Dessine les objets*/
+        public void paint(Graphics g)
+        {
+        	g.clearRect(0,500,0,500);
+        	super.paint(g);
+        	oval(g);
+        	line(g);
+        }
+
 		
         /**
          * Mets à jour l'affichage*/

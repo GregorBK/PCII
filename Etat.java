@@ -1,3 +1,5 @@
+import java.awt.Point;
+
 /**
  * Définit l’ensemble des données qui caractérisent l’état de l'interface*/
 public class Etat {
@@ -8,9 +10,9 @@ public class Etat {
 	public Parcours parcours;
 	
 	 /** Saut de l'objet */
-    public static final int SAUT = -20;
+    public static final int SAUT = -30;
     /** Chute de l'objet*/
-    public static final int CHUTE = 5; 
+    public static final int CHUTE = 2; 
 	
 	/**
 	 * Constructeurs*/
@@ -51,8 +53,40 @@ public class Etat {
 	{
 		if( (hauteur+Affichage.ELHAUT + CHUTE) < Affichage.HAUT )
 			hauteur = hauteur + CHUTE;
-		Etat.vue.revalidate();
-		Etat.vue.repaint();
-		
 	}
+	
+	/**
+	 * Teste si l'ellipse est touche la ligne brisée
+	 * @return
+	 */
+	public boolean testPerdu()
+	{
+		Point p1 = null;
+		Point p2 = null;
+		boolean ok = true;
+		int xcentre = this.vue.XCENTRE;
+		int i = 0;
+		while(ok)
+		{
+			if(this.parcours.points.get(i).x <= xcentre && this.parcours.points.get(i+1).x >= xcentre)
+			{
+				p1 = this.parcours.points.get(i);
+				p2 = this.parcours.points.get(i+1);
+				ok = false;
+			}else
+				{
+					i++;
+				}
+			
+		}	
+		
+		
+		float pente = (p2.y - p1.y) / ((float)p2.x - (float)p1.x);
+        float y = p1.y - pente *(p1.x - xcentre);
+
+        if(y > (hauteur+this.vue.ELHAUT) ) return false;
+        
+        return true;
+	}
+	
 }

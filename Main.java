@@ -4,17 +4,16 @@ import javax.swing.JFrame;
 public class Main {
 	  public static void main(String [] args) {
 		  
-		  Etat etat = new Etat(375);
+		  Etat etat = new Etat(50);
 		  Affichage vue = new Affichage(etat);
 		  Parcours parcours = new Parcours(vue);
 		  parcours.affichePoint();
 		  Control control = new Control(etat, vue);
 		  etat = new Etat(etat.getHauteur(),vue, parcours);
-		  parcours.setPosition(Affichage.XCENTRE);
 		  vue = new Affichage(etat);
 		  control = new Control(etat,vue);
-		  Voler vol = new Voler(etat);
-		  Avancer avance = new Avancer(parcours);
+		  Voler vol = new Voler(etat,vue);
+		  Avancer avancer = new Avancer(parcours,vue);
 		  
 		  
 		  JFrame test = new JFrame("Test dessin");
@@ -23,6 +22,7 @@ public class Main {
           test.pack();
           test.setVisible(true);
           vol.start();
+          avancer.start();
           
 		  }
 }
